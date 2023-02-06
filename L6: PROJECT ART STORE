@@ -1,18 +1,23 @@
 /**     SUMMARY:      I own my own art business.  I have an inventory of 15 original pieces, various prices, various amounts, various amounts sold.
                       1. Create a table of art piece name, amount of prints, price, and total sold.
+                          1a.  Utilize INSERT to add custom data to ficticious or real inventory.
+                          1b.  Utilize SELECT to create a table.
                       2. How much money have I made total?
                       3. Which art piece has made the most money? the least?
+                          3a.  Utilize ORDER BY to see high to low profit
                       4. Which art piece have I sold the most of? the least?
+                          4a. Utilize ORDER BY to see most quantity sold to least quantity
                       5. Which art piece only has 3 left which could be discounted or promod?
+                          5a. Utilize MIN(QUANTITY) to display discount/promo
                       6. What are the top 5 best sellers?  When I have 5 or less left, display time to reorder.
                       7. 
 **/
 
 
-/**     TABLE1: BASIC LABELS AND NUMBERS FOR ILLUSTRATION
 
+/**    
+TABLE1: BASIC LABELS AND NUMBERS FOR ILLUSTRATION
 **/
-
 
 CREATE TABLE store 
 (id INTEGER PRIMARY KEY,
