@@ -1,0 +1,40 @@
+
+/** FAVORITE BOOK LIST    SUMMARY:  1. CREATE TABLE OF FAVORITE BOOKS WITH PRIMARY KEY, name and Rating.
+                                    2. INSERT MORE DATA INTO TABLE.
+                                    3. UTILIZE SELECT TO DISPLAY BOOKLIST.
+
+SELECT name queries single from table
+SELECT * queries all from table
+
+**/
+
+CREATE TABLE bookfavs (id INTEGER PRIMARY KEY, name TEXT, five_STAR_RATING INTEGER);
+
+INSERT INTO bookfavs VALUES (1, "Life Of Pi",        5);
+INSERT INTO bookfavs VALUES (2, "Siddartha",         5);
+INSERT INTO bookfavs VALUES (3, "Jurassic Park",     5);
+INSERT INTO bookfavs VALUES (4, "The Sparrow",       5);
+INSERT INTO bookfavs VALUES (5, "Mexico City Blues", 5);
+INSERT INTO bookfavs VALUES (6, "Be Here Now",       5);
+SELECT * FROM bookfavs;
+
+/** 
+FAVORITE BOOK LIST: 
+Add own books
+**/
+
+CREATE TABLE bookfavs (id INTEGER PRIMARY KEY, name TEXT, rating INTEGER);
+
+INSERT INTO bookfavs VALUES (1, "Life Of Pi",        5);
+INSERT INTO bookfavs VALUES (2, "Siddartha",         5);
+INSERT INTO bookfavs VALUES (3, "Jurassic Park",     5);
+INSERT INTO bookfavs VALUES (4, "The Sparrow",       5);
+INSERT INTO bookfavs VALUES (5, "Mexico City Blues", 5);
+INSERT INTO bookfavs VALUES (6, "Be Here Now",       5);
+INSERT INTO bookfavs VALUES (7, "Life Of Pi",        5);
+INSERT INTO bookfavs VALUES (8, "Siddartha",         5);
+INSERT INTO bookfavs VALUES (9, "Jurassic Park",     5);
+INSERT INTO bookfavs VALUES (10, "The Sparrow",       5);
+INSERT INTO bookfavs VALUES (11, "Mexico City Blues", 5);
+INSERT INTO bookfavs VALUES (12, "Be Here Now",       5);
+SELECT * FROM bookfavs;
