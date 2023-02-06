@@ -1,0 +1,70 @@
+/**     SUMMARY:      I own my own art business.  I have an inventory of 15 original pieces, various prices, various amounts, various amounts sold.
+                      1. Create a table of art piece name, amount of prints, price, and total sold.
+                      2. How much money have I made total?
+                      3. Which art piece has made the most money? the least?
+                      4. Which art piece have I sold the most of? the least?
+                      5. Which art piece only has 3 left which could be discounted or promod?
+                      6. 
+**/
+
+
+/**     TABLE1: BASIC LABELS AND NUMBERS FOR ILLUSTRATION
+
+**/
+
+
+CREATE TABLE store 
+(id INTEGER PRIMARY KEY,
+name TEXT, quantity INTEGER, price INTEGER,total_sold INTEGER, total_profit INTEGER);
+
+INSERT INTO store VALUES(1, "ART1",  5, 150, 10, 500);
+INSERT INTO store VALUES(2, "ART2",  5, 140, 10, 500);
+INSERT INTO store VALUES(3, "ART3",  5, 130, 10, 500);
+INSERT INTO store VALUES(4, "ART4",  5, 120, 10, 500);
+INSERT INTO store VALUES(5, "ART5",  5, 110, 10, 500);
+INSERT INTO store VALUES(6, "ART6",  5, 100, 10, 500);
+INSERT INTO store VALUES(7, "ART7",   5, 90, 10, 500);
+INSERT INTO store VALUES(8, "ART8",   5, 80, 10, 500);
+INSERT INTO store VALUES(9, "ART9",   5, 70, 10, 500);
+INSERT INTO store VALUES(10, "ART10", 5, 60, 10, 500);
+INSERT INTO store VALUES(11, "ART11", 5, 50, 10, 500);
+INSERT INTO store VALUES(12, "ART12", 5, 40, 10, 500);
+INSERT INTO store VALUES(13, "ART13", 5, 30, 10, 500);
+INSERT INTO store VALUES(14, "ART14", 5, 20, 10, 500);
+INSERT INTO store VALUES(15, "ART15", 5, 10, 10, 500);
+
+SELECT * FROM store;
+
+
+/** TABLE2 SUMMARY: FAKE total_sold NUMBERS for deeper illustration
+
+**/
+
+
+CREATE TABLE store 
+(id INTEGER PRIMARY KEY,name TEXT, 
+quantity INTEGER, price INTEGER,total_sold INTEGER, total_profit INTEGER);
+
+INSERT INTO store VALUES(1, "ART1", 5, 150, 38, 5700);
+INSERT INTO store VALUES(2, "ART2", 5, 140, 104, 14560);
+INSERT INTO store VALUES(3, "ART3", 5, 130, 11, 330);
+INSERT INTO store VALUES(4, "ART4", 5, 120, 47, 5640);
+INSERT INTO store VALUES(5, "ART5", 5, 110, 136, 14960);
+INSERT INTO store VALUES(6, "ART6", 5, 100, 17, 500);
+INSERT INTO store VALUES(7, "ART7", 5, 90, 93, 8370);
+INSERT INTO store VALUES(8, "ART8", 5, 80, 34, 2720);
+INSERT INTO store VALUES(9, "ART9", 5, 70, 79, 500);
+INSERT INTO store VALUES(10, "ART10", 5, 60,123, 7380);
+INSERT INTO store VALUES(11, "ART11", 5, 50, 24, 1200);
+INSERT INTO store VALUES(12, "ART12", 5, 40, 73, 2920);
+INSERT INTO store VALUES(13, "ART13", 5, 30, 59, 1770);
+INSERT INTO store VALUES(14, "ART14", 5, 20, 59, 1180);
+INSERT INTO store VALUES(15, "ART15", 5, 10, 247, 2470);
+
+SELECT * FROM store;
+
+SELECT SUM(total_profit) FROM store;
+SELECT SUM(quantity) FROM store;
+
+SELECT * FROM store ORDER BY price;
+SELECT * FROM store ORDER BY total_sold;
