@@ -3,7 +3,7 @@
                           1a.  Utilize INSERT to add custom data to ficticious or real inventory.
                           1b.  Utilize SELECT to create a table.
                       2. How much money have I made total?
-                      3. Which art piece has made the most money? the least? 
+                      3. Which art piece has made the most money? the least? top 5? lowest 5?
            *               3a.  Utilize ORDER BY to see high to low profit, quantity left, price and total sold
                       4. How many pieces have I sold total?  Which art piece have I sold the most of? the least?
                           4a. Utilize ORDER BY to see most quantity sold to least quantity
@@ -135,25 +135,45 @@ SELECT name, total_profit FROM store WHERE total_profit ORDER BY total_profit LI
 -SELECT name, total_sold FROM store ORDER BY total_sold desc;
 
 -SELECT name, total_profit FROM store ORDER BY total_profit;
--SELECT name, total_profit FROM store ORDER BY total_profit desc;
+-SELECT name, total_profit FROM store ORDER BY total_profit desc;                           /** most profitable **/
+-SELECT name, total_profit FROM store WHERE total_profit>10000 ORDER BY total_profit DESC;  /** over $10,000**/
 
 
 
-/** 
+/**  4. How many pieces have I sold total?  Which art piece have I sold the most of? the least?
+**/
 
--SELECT name, total_profit FROM store WHERE total_profit>10000 ORDER BY total_profit DESC;
+SELECT SUM(total_sold) FROM store;
+SELECT MAX(total_sold) FROM store;
 
--SELECT name, total_profit FROM store ORDER BY total_profit desc;
+SELECT name, total_sold FROM store ORDER BY total_sold DESC LIMIT 5;   /**  sold the MOST**/
+SELECT name, total_sold FROM store ORDER BY total_sold LIMIT 5;       /**  sold the LEAST**/
+
+SELECT name, quantity_avail FROM store WHERE quantity_avail>50 ORDER BY quantity_avail;     /** high inventory left **/
+SELECT name, quantity_avail from store WHERE quantity_avail<10 ORDER BY quantity_avail;     /** low quantity to order **/
 
 
-SELECT name, quantity_avail from store WHERE quantity_avail<10 ORDER BY quantity_avail;
+
+
 
 /** 6. What are the top 5 best sellers where we have a low quantity available and they have a high total profit?
 **/
+-SELECT name, total_profit FROM store WHERE total_profit>10000 AND total_sold<20 ORDER BY total_profit LIMIT 5;
+
+-SELECT name, total_profit FROM store WHERE total_profit>5000 AND total_sold>100 ORDER BY total_profit LIMIT 5;
 
 
-SELECT SUM(quantity_avail) FROM store;
+/** 6. What are the top 5 worst sellers where we have a high quantity available and they have a low total profit?
+**/
+
+-SELECT name, total_profit FROM store WHERE total_profit<10000 AND total_sold<20 ORDER BY total_profit LIMIT 5;
+
+
+-SELECT name, total_profit FROM store WHERE total_profit<10000 ORDER BY total_profit LIMIT 5;
+
 
 /** How many pieces do we have available total?
 
 **/
+SELECT SUM(quantity_avail) FROM store;
+
