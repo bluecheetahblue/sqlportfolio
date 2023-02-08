@@ -3,9 +3,9 @@
                           1a.  Utilize INSERT to add custom data to ficticious or real inventory.
                           1b.  Utilize SELECT to create a table.
                       2. How much money have I made total?
-                      3. Which art piece has made the most money? the least?
-                          3a.  Utilize ORDER BY to see high to low profit
-                      4. Which art piece have I sold the most of? the least?
+                      3. Which art piece has made the most money? the least? 
+           *               3a.  Utilize ORDER BY to see high to low profit, quantity left, price and total sold
+                      4. How many pieces have I sold total?  Which art piece have I sold the most of? the least?
                           4a. Utilize ORDER BY to see most quantity sold to least quantity
                       5. Which art piece only has 3 left which could be discounted or promod?
                           5a. Utilize MIN(QUANTITY) to display discount/promo
@@ -15,8 +15,7 @@
 
 
 
-/**    
-TABLE1: BASIC LABELS AND NUMBERS FOR ILLUSTRATION
+/**    TABLE1: BASIC LABELS AND NUMBERS FOR ILLUSTRATION
         1a.  Utilize INSERT to add custom data to ficticious or real inventory.
 **/
 
@@ -92,31 +91,40 @@ INSERT INTO store VALUES(13, "ART13", 23, 30, 59, 1770);
 INSERT INTO store VALUES(14, "ART14", 28, 20, 59, 1180);
 INSERT INTO store VALUES(15, "ART15", 2, 10, 247, 2470);
 
-
-      1b.  Utilize SELECT to create a table.
+          1b.  Utilize SELECT to create a table.
 **/
 SELECT * FROM store;
 
-/**
-       2. How much money have I made total?
+/**        2. How much money have I made total?
 **/
-
 SELECT SUM(total_profit) FROM store;
-/**
- 3. Which art piece has made the most money?
-**/
 
+
+/**         3. Which art piece has made the most money?
+**/
 SELECT MAX(total_profit) FROM store;
-/**
- 3. Which art piece has made the least money? 
+
+/**         3. Which 5 art pieces have made the most money?
+**/
+SELECT name, total_profit FROM store WHERE total_profit ORDER BY total_profit desc LIMIT 5;
+
+
+/**         3. Which art piece has made the least money? 
 **/
 SELECT MIN(total_profit) FROM store;
 
-/**
-  3a.  Utilize ORDER BY to see low(ROW1) to high(ROW50)(automatic), (ROW1)high to low(ROW50) (desc) profit,
+/**         3. Which 5 art pieces have made the least money? 
+**/
+
+SELECT name, total_profit FROM store WHERE total_profit ORDER BY total_profit LIMIT 5;
+
+
+/**         3a.  Utilize ORDER BY to see low(ROW1) to high(ROW50)(automatic), (ROW1)high to low(ROW50) (desc) profit,
                                 price
                                 total_sold
+                                quantity_avail
 **/
+
 -SELECT name, quantity_avail FROM store ORDER BY quantity_avail;
 -SELECT name, quantity_avail FROM store ORDER BY quantity_avail desc;
 
@@ -129,4 +137,23 @@ SELECT MIN(total_profit) FROM store;
 -SELECT name, total_profit FROM store ORDER BY total_profit;
 -SELECT name, total_profit FROM store ORDER BY total_profit desc;
 
-SELECT SUM(quantity) FROM store;
+
+
+/** 
+
+-SELECT name, total_profit FROM store WHERE total_profit>10000 ORDER BY total_profit DESC;
+
+-SELECT name, total_profit FROM store ORDER BY total_profit desc;
+
+
+SELECT name, quantity_avail from store WHERE quantity_avail<10 ORDER BY quantity_avail;
+
+/** 6. What are the top 5 best sellers where we have a low quantity available and they have a high total profit?
+**/
+
+
+SELECT SUM(quantity_avail) FROM store;
+
+/** How many pieces do we have available total?
+
+**/
