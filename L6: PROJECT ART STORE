@@ -17,6 +17,7 @@
 
 /**    
 TABLE1: BASIC LABELS AND NUMBERS FOR ILLUSTRATION
+        1a.  Utilize INSERT to add custom data to ficticious or real inventory.
 **/
 
 CREATE TABLE store 
@@ -43,7 +44,7 @@ SELECT * FROM store;
 
 
 /** TABLE2 SUMMARY: FAKE total_sold NUMBERS for deeper illustration
-
+        1a.  Utilize INSERT to add custom data to ficticious or real inventory.
 **/
 
 
@@ -67,10 +68,65 @@ INSERT INTO store VALUES(13, "ART13", 5, 30, 59, 1770);
 INSERT INTO store VALUES(14, "ART14", 5, 20, 59, 1180);
 INSERT INTO store VALUES(15, "ART15", 5, 10, 247, 2470);
 
+/** TABLE3 SUMMARY: FAKE NUMBERS for all datapoints for deeper illustration
+        1a.  Utilize INSERT to add custom data to ficticious or real inventory.
+**/
+
+CREATE TABLE store 
+(id INTEGER PRIMARY KEY,name TEXT, 
+quantity_avail INTEGER, price INTEGER,total_sold INTEGER, total_profit INTEGER);
+
+INSERT INTO store VALUES(1, "ART1", 3, 150, 38, 5700);
+INSERT INTO store VALUES(2, "ART2", 5, 140, 104, 14560);
+INSERT INTO store VALUES(3, "ART3", 8, 130, 11, 330);
+INSERT INTO store VALUES(4, "ART4", 40, 120, 47, 5640);
+INSERT INTO store VALUES(5, "ART5", 46, 110, 136, 14960);
+INSERT INTO store VALUES(6, "ART6", 34, 100, 17, 500);
+INSERT INTO store VALUES(7, "ART7", 23, 90, 93, 8370);
+INSERT INTO store VALUES(8, "ART8", 12, 80, 34, 2720);
+INSERT INTO store VALUES(9, "ART9", 15, 70, 79, 500);
+INSERT INTO store VALUES(10, "ART10", 17, 60,123, 7380);
+INSERT INTO store VALUES(11, "ART11", 18, 50, 24, 1200);
+INSERT INTO store VALUES(12, "ART12", 20, 40, 73, 2920);
+INSERT INTO store VALUES(13, "ART13", 23, 30, 59, 1770);
+INSERT INTO store VALUES(14, "ART14", 28, 20, 59, 1180);
+INSERT INTO store VALUES(15, "ART15", 2, 10, 247, 2470);
+
+
+      1b.  Utilize SELECT to create a table.
+**/
 SELECT * FROM store;
 
-SELECT SUM(total_profit) FROM store;
-SELECT SUM(quantity) FROM store;
+/**
+       2. How much money have I made total?
+**/
 
-SELECT * FROM store ORDER BY price;
-SELECT * FROM store ORDER BY total_sold;
+SELECT SUM(total_profit) FROM store;
+/**
+ 3. Which art piece has made the most money?
+**/
+
+SELECT MAX(total_profit) FROM store;
+/**
+ 3. Which art piece has made the least money? 
+**/
+SELECT MIN(total_profit) FROM store;
+
+/**
+  3a.  Utilize ORDER BY to see low(ROW1) to high(ROW50)(automatic), (ROW1)high to low(ROW50) (desc) profit,
+                                price
+                                total_sold
+**/
+-SELECT name, quantity_avail FROM store ORDER BY quantity_avail;
+-SELECT name, quantity_avail FROM store ORDER BY quantity_avail desc;
+
+-SELECT name, price FROM store ORDER BY price;
+-SELECT name, price FROM store ORDER BY price desc;
+
+-SELECT name, total_sold FROM store ORDER BY total_sold;
+-SELECT name, total_sold FROM store ORDER BY total_sold desc;
+
+-SELECT name, total_profit FROM store ORDER BY total_profit;
+-SELECT name, total_profit FROM store ORDER BY total_profit desc;
+
+SELECT SUM(quantity) FROM store;
