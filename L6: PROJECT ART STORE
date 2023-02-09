@@ -10,7 +10,7 @@
                       5. Which art piece only has 3 left which could be discounted or promod?
                           5a. Utilize MIN(QUANTITY) to display discount/promo
                       6. What are the top 5 best sellers?  When I have 5 or less left, display time to reorder.
-                      7. 
+                      
 **/
 
 
@@ -149,11 +149,14 @@ SELECT MAX(total_sold) FROM store;
 SELECT name, total_sold FROM store ORDER BY total_sold DESC LIMIT 5;   /**  sold the MOST**/
 SELECT name, total_sold FROM store ORDER BY total_sold LIMIT 5;       /**  sold the LEAST**/
 
-SELECT name, quantity_avail FROM store WHERE quantity_avail>50 ORDER BY quantity_avail;     /** high inventory left **/
-SELECT name, quantity_avail from store WHERE quantity_avail<10 ORDER BY quantity_avail;     /** low quantity to order **/
+SELECT name, quantity_avail FROM store WHERE quantity_avail>25 ORDER BY quantity_avail;     /** high inventory left **/
+SELECT name, quantity_avail FROM store WHERE quantity_avail<25 ORDER BY quantity_avail LIMIT 10;     /** low inventory left **/
 
+SELECT name, quantity_avail FROM store WHERE quantity_avail<10 ORDER BY quantity_avail;     /** low quantity to order **/
 
-
+/** 5. Which art piece only has 3 left which could be discounted or promod?
+**/
+SELECT name, quantity_avail FROM store WHERE quantity_avail<25 ORDER BY quantity_avail LIMIT 10;     /** low inventory left **/
 
 
 /** 6. What are the top 5 best sellers where we have a low quantity available and they have a high total profit?
