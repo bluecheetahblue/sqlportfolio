@@ -10,6 +10,10 @@
                       5. Which art piece only has 3 left which could be discounted or promod?
                           5a. Utilize MIN(QUANTITY) to display discount/promo
                       6. What are the top 5 best sellers?  When I have 5 or less left, display time to reorder.
+                      7. Which aisle is the most profitable?  Which aisle has sold the most items?
+                          7a.  Utilize GROUP By to See which aisle has sold the most by dollar and item.
+                      8. Display a list of profitability labels dependent on group case.
+                          
                       
 **/
 
@@ -21,23 +25,23 @@
 
 CREATE TABLE store 
 (id INTEGER PRIMARY KEY,
-name TEXT, quantity INTEGER, price INTEGER,total_sold INTEGER, total_profit INTEGER);
+name TEXT, quantity INTEGER, price INTEGER,total_sold INTEGER, total_profit INTEGER, aisle INTEGER);
 
-INSERT INTO store VALUES(1, "ART1",  5, 150, 10, 500);
-INSERT INTO store VALUES(2, "ART2",  5, 140, 10, 500);
-INSERT INTO store VALUES(3, "ART3",  5, 130, 10, 500);
-INSERT INTO store VALUES(4, "ART4",  5, 120, 10, 500);
-INSERT INTO store VALUES(5, "ART5",  5, 110, 10, 500);
-INSERT INTO store VALUES(6, "ART6",  5, 100, 10, 500);
-INSERT INTO store VALUES(7, "ART7",   5, 90, 10, 500);
-INSERT INTO store VALUES(8, "ART8",   5, 80, 10, 500);
-INSERT INTO store VALUES(9, "ART9",   5, 70, 10, 500);
-INSERT INTO store VALUES(10, "ART10", 5, 60, 10, 500);
-INSERT INTO store VALUES(11, "ART11", 5, 50, 10, 500);
-INSERT INTO store VALUES(12, "ART12", 5, 40, 10, 500);
-INSERT INTO store VALUES(13, "ART13", 5, 30, 10, 500);
-INSERT INTO store VALUES(14, "ART14", 5, 20, 10, 500);
-INSERT INTO store VALUES(15, "ART15", 5, 10, 10, 500);
+INSERT INTO store VALUES(1, "ART1",  5, 150, 10, 500,1);
+INSERT INTO store VALUES(2, "ART2",  5, 140, 10, 500,1);
+INSERT INTO store VALUES(3, "ART3",  5, 130, 10, 500,1);
+INSERT INTO store VALUES(4, "ART4",  5, 120, 10, 500,2);
+INSERT INTO store VALUES(5, "ART5",  5, 110, 10, 500,2);
+INSERT INTO store VALUES(6, "ART6",  5, 100, 10, 500,2);
+INSERT INTO store VALUES(7, "ART7",   5, 90, 10, 500,3);
+INSERT INTO store VALUES(8, "ART8",   5, 80, 10, 500,3);
+INSERT INTO store VALUES(9, "ART9",   5, 70, 10, 500,3);
+INSERT INTO store VALUES(10, "ART10", 5, 60, 10, 500,4);
+INSERT INTO store VALUES(11, "ART11", 5, 50, 10, 500,4);
+INSERT INTO store VALUES(12, "ART12", 5, 40, 10, 500,4);
+INSERT INTO store VALUES(13, "ART13", 5, 30, 10, 500,5);
+INSERT INTO store VALUES(14, "ART14", 5, 20, 10, 500,5);
+INSERT INTO store VALUES(15, "ART15", 5, 10, 10, 500,5);
 
 SELECT * FROM store;
 
@@ -73,23 +77,23 @@ INSERT INTO store VALUES(15, "ART15", 5, 10, 247, 2470);
 
 CREATE TABLE store 
 (id INTEGER PRIMARY KEY,name TEXT, 
-quantity_avail INTEGER, price INTEGER,total_sold INTEGER, total_profit INTEGER);
+quantity_avail INTEGER, price INTEGER,total_sold INTEGER, total_profit INTEGER, aisle INTEGER);
 
-INSERT INTO store VALUES(1, "ART1", 3, 150, 38, 5700);
-INSERT INTO store VALUES(2, "ART2", 5, 140, 104, 14560);
-INSERT INTO store VALUES(3, "ART3", 8, 130, 11, 330);
-INSERT INTO store VALUES(4, "ART4", 40, 120, 47, 5640);
-INSERT INTO store VALUES(5, "ART5", 46, 110, 136, 14960);
-INSERT INTO store VALUES(6, "ART6", 34, 100, 17, 500);
-INSERT INTO store VALUES(7, "ART7", 23, 90, 93, 8370);
-INSERT INTO store VALUES(8, "ART8", 12, 80, 34, 2720);
-INSERT INTO store VALUES(9, "ART9", 15, 70, 79, 500);
-INSERT INTO store VALUES(10, "ART10", 17, 60,123, 7380);
-INSERT INTO store VALUES(11, "ART11", 18, 50, 24, 1200);
-INSERT INTO store VALUES(12, "ART12", 20, 40, 73, 2920);
-INSERT INTO store VALUES(13, "ART13", 23, 30, 59, 1770);
-INSERT INTO store VALUES(14, "ART14", 28, 20, 59, 1180);
-INSERT INTO store VALUES(15, "ART15", 2, 10, 247, 2470);
+INSERT INTO store VALUES(1, "ART1", 3, 150, 38, 5700,1);
+INSERT INTO store VALUES(2, "ART2", 5, 140, 104, 14560,1);
+INSERT INTO store VALUES(3, "ART3", 8, 130, 11, 330,1);
+INSERT INTO store VALUES(4, "ART4", 40, 120, 47, 5640,2);
+INSERT INTO store VALUES(5, "ART5", 46, 110, 136, 14960,2);
+INSERT INTO store VALUES(6, "ART6", 34, 100, 17, 500,2);
+INSERT INTO store VALUES(7, "ART7", 23, 90, 93, 8370,3);
+INSERT INTO store VALUES(8, "ART8", 12, 80, 34, 2720,3);
+INSERT INTO store VALUES(9, "ART9", 15, 70, 79, 500,3);
+INSERT INTO store VALUES(10, "ART10", 17, 60,123, 7380,4);
+INSERT INTO store VALUES(11, "ART11", 18, 50, 24, 1200,4);
+INSERT INTO store VALUES(12, "ART12", 20, 40, 73, 2920,4);
+INSERT INTO store VALUES(13, "ART13", 23, 30, 59, 1770,5);
+INSERT INTO store VALUES(14, "ART14", 28, 20, 59, 1180,5);
+INSERT INTO store VALUES(15, "ART15", 2, 10, 247, 2470,5);
 
           1b.  Utilize SELECT to create a table.
 **/
@@ -143,20 +147,20 @@ SELECT name, total_profit FROM store WHERE total_profit ORDER BY total_profit LI
 /**  4. How many pieces have I sold total?  Which art piece have I sold the most of? the least?
 **/
 
-SELECT SUM(total_sold) FROM store;
-SELECT MAX(total_sold) FROM store;
+-SELECT SUM(total_sold) FROM store;
+-SELECT MAX(total_sold) FROM store;
 
-SELECT name, total_sold FROM store ORDER BY total_sold DESC LIMIT 5;   /**  sold the MOST**/
-SELECT name, total_sold FROM store ORDER BY total_sold LIMIT 5;       /**  sold the LEAST**/
+-SELECT name, total_sold FROM store ORDER BY total_sold DESC LIMIT 5;   /**  sold the MOST**/
+-SELECT name, total_sold FROM store ORDER BY total_sold LIMIT 5;       /**  sold the LEAST**/
 
-SELECT name, quantity_avail FROM store WHERE quantity_avail>25 ORDER BY quantity_avail;     /** high inventory left **/
-SELECT name, quantity_avail FROM store WHERE quantity_avail<25 ORDER BY quantity_avail LIMIT 10;     /** low inventory left **/
+-SELECT name, quantity_avail FROM store WHERE quantity_avail>25 ORDER BY quantity_avail;     /** high inventory left **/
+-SELECT name, quantity_avail FROM store WHERE quantity_avail<25 ORDER BY quantity_avail LIMIT 10;     /** low inventory left **/
 
-SELECT name, quantity_avail FROM store WHERE quantity_avail<10 ORDER BY quantity_avail;     /** low quantity to order **/
+-SELECT name, quantity_avail FROM store WHERE quantity_avail<10 ORDER BY quantity_avail;     /** low quantity to order **/
 
 /** 5. Which art piece only has 3 left which could be discounted or promod?
 **/
-SELECT name, quantity_avail FROM store WHERE quantity_avail<25 ORDER BY quantity_avail LIMIT 10;     /** low inventory left **/
+-SELECT name, quantity_avail FROM store WHERE quantity_avail<25 ORDER BY quantity_avail LIMIT 10;     /** low inventory left **/
 
 
 /** 6. What are the top 5 best sellers where we have a low quantity available and they have a high total profit?
@@ -169,14 +173,70 @@ SELECT name, quantity_avail FROM store WHERE quantity_avail<25 ORDER BY quantity
 /** 6. What are the top 5 worst sellers where we have a high quantity available and they have a low total profit?
 **/
 
--SELECT name, total_profit FROM store WHERE total_profit<10000 AND total_sold<20 ORDER BY total_profit LIMIT 5;
+-SELECT name, total_profit FROM store WHERE total_profit<5000 AND total_sold<20 ORDER BY total_profit LIMIT 5;
 
 
 -SELECT name, total_profit FROM store WHERE total_profit<10000 ORDER BY total_profit LIMIT 5;
 
 
 /** How many pieces do we have available total?
-
 **/
-SELECT SUM(quantity_avail) FROM store;
 
+-SELECT SUM(quantity_avail) FROM store;
+
+/** 7. Which aisle is the most profitable?  Which aisle has sold the most items?
+       7a.  Utilize GROUP By to See which aisle has sold the most by dollar and item.
+**/
+
+-SELECT aisle, sum(total_profit), sum(total_sold) from store GROUP BY aisle;
+/**     8. Display a list of profitability labels dependent on group case.
+**/
+
+/**   TABLE 8.1 FInding the right metrics to calculate correct situation in order.
+ **/
+   -SELECT name, CASE 
+    WHEN total_profit>= 5000 AND total_sold>= 20 THEN "LOW PROFIT"
+    WHEN total_profit>= 10000 AND total_sold>= 30 THEN "MED PROFIT"
+    WHEN total_profit>= 20000 AND total_sold>= 20 THEN "HIGH PROFIT"
+    END "most_profitable"
+    FROM store
+    ORDER BY most_profitable;
+
+
+/**  TABLE 8.1 FInding the right metrics to calculate correct situation in order.  RANGES OF METRICS.
+**/
+-SELECT name, CASE 
+    WHEN total_profit<7500 AND total_profit<=5000 AND total_sold>= 20 THEN "LOW PROFIT"
+    WHEN total_profit<10000 AND total_profit>=7500 AND total_sold>= 20 THEN "MED PROFIT"
+    WHEN total_profit>=10000 AND total_sold>= 20 THEN "HIGH PROFIT"
+    ELSE "LEAST PROFITABLE"
+    END "most_profitable"
+    FROM store
+    ORDER BY most_profitable;
+
+
+/**  TABLE 8.1 FInding the right metrics to calculate correct situation in order.  RANGES OF METRICS.
+**/
+-SELECT name, total_profit, total_sold, CASE 
+    WHEN total_profit<=5000 AND total_sold>= 10 THEN "LOW PROFIT"
+    WHEN total_profit>5000 AND total_profit<=7500 AND total_sold>= 10 THEN "MED PROFIT"
+    WHEN total_profit>7500 AND total_profit<=10000 AND total_sold>= 10 THEN "HIGH PROFIT"
+    WHEN total_profit>=10000 THEN "HIGHEST PROFIT"
+    ELSE "LEAST PROFITABLE"
+    END "most_profitable"
+    FROM store
+    ORDER BY total_profit DESC;
+
+/**TABLE 8.1 FInding the right metrics to calculate correct situation in order.FURTHER DIVISION OF RANGES
+**/ 
+
+-SELECT name, total_profit, total_sold, CASE 
+    WHEN total_profit<=2500 AND total_sold>= 10 THEN "LOW PROFIT"
+    WHEN total_profit>2500 AND total_profit<=5000 AND total_sold>= 20 THEN "MED PROFIT"
+    WHEN total_profit>5000 AND total_profit<=7500 AND total_sold>= 20 THEN "HIGH PROFIT"
+    WHEN total_profit>7500 AND total_profit<=10000 AND total_sold>= 10 THEN "HIGHER PROFIT"
+    WHEN total_profit>=10000 THEN "HIGHEST PROFIT"
+    ELSE "LEAST PROFITABLE"
+    END "most_profitable"
+    FROM store
+    ORDER BY total_profit DESC;
