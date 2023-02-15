@@ -16,6 +16,11 @@
                     5b. by density?
                     
                6. How many satellites does Saturn have?  Jupiter? Neptune? Uranus?
+               
+               7. What are average, max, and min values in the data?
+               8. What about those numbers per category in the data (using HAVING)?
+               9. What ways are there to group the data values that don’t exist yet (using CASE)?
+               10. What interesting ways are there to filter the data (using AND/OR)?
 
 
 CREATE TABLE solar_system_objects(
