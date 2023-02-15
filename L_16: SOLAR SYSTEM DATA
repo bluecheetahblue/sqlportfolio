@@ -1,8 +1,23 @@
-/* 
-Solar system objects
-Adapted from: http://en.wikipedia.org/wiki/List_of_Solar_System_objects_by_size
-Collected by: https://www.khanacademy.org/profile/patrick809/programs
+/*    Solar system objects        Adapted from: http://en.wikipedia.org/wiki/List_of_Solar_System_objects_by_size
+      Collected by: https://www.khanacademy.org/profile/patrick809/programs
 */
+
+/**            1.  How many objects are in this database?
+
+               2.  How many planets are in this database?
+                    2a. What are they?
+               3. How many satellites are in this database?
+                    3a.  What are they?
+               4.  What object is the largest by volume? What are the largest 10 objects by volume?
+                    4a. By mass?
+                    4b. By density?
+               5. What object is the smallest by volume?  What are the smallest 10 objects by volume?
+                    5a. by mass?
+                    5b. by density?
+                    
+               6. How many satellites does Saturn have?  Jupiter? Neptune? Uranus?
+
+
 CREATE TABLE solar_system_objects(
   body TEXT
 , mean_radius NUMERIC         /* km */
@@ -50,4 +65,96 @@ INSERT INTO solar_system_objects(body,mean_radius,mean_radius_rel,volume,volume_
 INSERT INTO solar_system_objects(body,mean_radius,mean_radius_rel,volume,volume_rel,mass,mass_rel,density,surface_gravity,surface_gravity_rel,type_of_object,shape) VALUES ('Tethys ',531.1,0.083,0.624,0.0006,0.6173,0.000103,0.984,0.145,0.015,'satellite of Saturn','round');
 INSERT INTO solar_system_objects(body,mean_radius,mean_radius_rel,volume,volume_rel,mass,mass_rel,density,surface_gravity,surface_gravity_rel,type_of_object,shape) VALUES ('Ceres ',476.2,0.076,0.437,0.0004,0.95,0.000159,2.077,0.27,0.0275,'dwarf planet belt asteroid','round');
 
+
+/**     1. How many objects are in this database?
+**/
+
+SELECT count(*) FROM solar_system_objects;
+
+/**     2.  How many planets are in this database?  
+          2a. What are they?
+
+**/
+SELECT COUNT(*),
+    CASE
+    WHEN type_of_object LIKE "%planet%" THEN "PLANET"
+    WHEN type_of_object LIKE "%satellite%" THEN "SATELLITE"
+    ELSE "OTHER"
+    END AS "type"
+FROM solar_system_objects
+    GROUP BY type;
+
+SELECT body FROM solar_system_objects WHERE type_of_object LIKE "%planet%";
+
+/**     3.  How any satellites are in this database? 
+          3a. What are they?
+
+SELECT COUNT(*),
+    CASE
+    WHEN type_of_object LIKE "%planet%" THEN "planet"
+    WHEN type_of_object LIKE "%satellite%" THEN "satellite"
+    WHEN type_of_object LIKE "%star%" THEN "star"
+    ELSE "other"
+    END AS"type"
+FROM solar_system_objects
+    GROUP BY type;
+
+SELECT body FROM solar_system_objects WHERE type_of_object LIKE "%satellite%";
+
+/**     4. What object is the largest by volume?  What are the largest 10 objects by volume?  by mass?   by density?
+
+**/
+SELECT body, max(volume) FROM solar_system_objects;
+SELECT body, volume FROM solar_system_objects order BY volume desc limit 10;
+
+SELECT body, max(mass) FROM solar_system_objects;
+SELECT body, mass FROM solar_system_objects order BY mass desc limit 10;
+
+SELECT body, max(density) FROM solar_system_objects;
+SELECT body, density FROM solar_system_objects order BY density desc limit 10;
+
+/**     5.  What is the smallest object by volume?  What are the smallest 10 objects by volume?  by mass?  by density?
+
+**/
+
+SELECT body, min(volume) FROM solar_system_objects;
+SELECT body, volume FROM solar_system_objects order BY volume limit 10;
+
+SELECT body, min(mass) FROM solar_system_objects;
+SELECT body, mass FROM solar_system_objects order BY mass limit 10;
+
+SELECT body, min(density) FROM solar_system_objects;
+SELECT body, density FROM solar_system_objects order BY density limit 10;
+
+/**     6.  How many satellites does Saturn have?  Jupiter? Neptune? Uranus?
+
+**/
+
+SELECT COUNT(*),
+    CASE
+    WHEN type_of_object LIKE "satellite of Saturn" THEN "Saturn.S"
+    WHEN type_of_object LIKE "satellite of Jupiter" THEN "Jupiter.S"
+    WHEN type_of_object LIKE "satellite of Neptune" THEN "Neptune.S"
+    WHEN type_of_object LIKE "satellite of Uranus" THEN "Uranus.S"
+    ELSE "other"
+    END AS"type"
+FROM solar_system_objects
+    ORDER BY type;
+
+
+
+SELECT body,
+    CASE
+    WHEN type_of_object LIKE "satellite of Saturn" THEN "Saturn.S"
+    WHEN type_of_object LIKE "satellite of Earth" THEN "Earth.S"
+    WHEN type_of_object LIKE "satellite of Jupiter" THEN "Jupiter.S"
+    WHEN type_of_object LIKE "satellite of Neptune" THEN "Neptune.S"
+    WHEN type_of_object LIKE "satellite of Uranus" THEN "Uranus.S"
+    WHEN type_of_object LIKE "%dwarf planet%" THEN "Dwarf.planet"
+    WHEN type_of_object LIKE "%planet%" THEN "PLANET"
+    WHEN type_of_object LIKE "star" THEN "STAR"
+    ELSE "other"
+    END AS"type"
+FROM solar_system_objects
+    ORDER BY type;
 
