@@ -19,3 +19,9 @@ INSERT INTO movies
     VALUES (7, "Harry Potter and the Deathly Hallows – Part 1", 2010, 8);
 INSERT INTO movies 
     VALUES (8, "Harry Potter and the Deathly Hallows – Part 2", 2011, NULL);
+    
+
+SELECT movies.title, sequels.title as true_sequel
+FROM movies
+LEFT JOIN movies sequels
+    ON movies.sequel_id = sequels.id;
